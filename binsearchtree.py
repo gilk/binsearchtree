@@ -11,7 +11,8 @@ class BST:
 	def __init__(self):
 
 		self.root = None
-	
+
+
 	def add_node(self,val):
 		
 		if self.root == None: self.root = Node(val)
@@ -36,20 +37,44 @@ class BST:
 						
 				else: break #ignore duplicate entries
 	
-
+	def filltree(self,listob):
+		for i in listob:
+			self.add_node(i)
 	
-	def inorder(self,node):
+	def printsort(self,node):
 		
 		if node is not None:
 			
-			self.inorder(node.left)
+			self.printsort(node.left)
 			print node.value
-			self.inorder(node.right)
+			self.printsort(node.right)
+
+#to print as list	
+	def recsort(self,node,lis):
+		if node is not None:
+			
+			self.recsort(node.left,lis)
+			lis.append(node.value)
+			self.recsort(node.right,lis)
+		
+	def sortprint(self,node):
+		out =[]
+		self.recsort(node,out)
+		print out
+			
+		
     	
 if __name__ == '__main__':
 	t=BST()
-	t.add_node(5)
+	t.add_node('abe')
 	t.add_node(3)
-	t.add_node(2)
+	t.add_node(3.2)
+	t.add_node('dad')
 	t.add_node(12)
-	t.inorder(t.root)
+	t.printsort(t.root)
+	
+	g=BST()
+	things=['abe','dad',3,4,5.3,58]
+	g.filltree(things)
+	g.printsort(g.root)
+	g.sortprint(g.root)
